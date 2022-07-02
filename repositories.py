@@ -1,16 +1,14 @@
-from pyexpat import model
-from sqlalchemy.orm import Session, joinedload
-from sqlalchemy.sql import text
+from sqlalchemy.orm import Session
 from sqlalchemy import func
 import models, schemas
 from riotwatcher import LolWatcher
 from datetime import datetime
 from pytz import timezone
-from settings import region, riot_api_key
+import os
 import time
 
-W = LolWatcher(riot_api_key)
-REGION = region
+W = LolWatcher(os.environ['RIOT_API_KEY'])
+REGION = os.environ['LOLWATCHER_REGIN']
 
 class SummonerRepo:
     def fetch_by_name(db: Session,name):

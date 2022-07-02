@@ -2,9 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import models as models
 from models import *
-from settings import db_connection
+import os
 
-SQLALCHEMY_DATABASE_URL = db_connection
+SQLALCHEMY_DATABASE_URL = os.environ['DB_CONNECTION']
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False},echo=True
 )
