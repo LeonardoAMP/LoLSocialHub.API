@@ -8,7 +8,7 @@ import os
 import time
 
 W = LolWatcher(os.environ['RIOT_API_KEY'])
-REGION = os.environ['LOLWATCHER_REGIN']
+REGION = os.environ['LOLWATCHER_REGION']
 
 class SummonerRepo:
     def fetch_by_name(db: Session,name):
