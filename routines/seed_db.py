@@ -4,7 +4,10 @@ import models as models
 from models import *
 import os
 
-SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL')
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+SQLALCHEMY_DATABASE_URL = uri
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False},echo=True
 )

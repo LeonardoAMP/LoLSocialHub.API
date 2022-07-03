@@ -4,8 +4,12 @@ import os
 from repositories import SummonerRepo, SettingRepo
 import requests
 
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 r = requests.get("https://ddragon.leagueoflegends.com/api/versions.json")
-SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL')
+SQLALCHEMY_DATABASE_URL = uri
+
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False},echo=True
 )
