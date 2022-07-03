@@ -14,8 +14,8 @@ class SummonerRepo:
     def fetch_by_name(db: Session,name):
         return db.query(models.Summoner).filter(func.lower(models.Summoner.summoner_name) == name.lower()).first()
 
-    def fetch_all(db: Session, skip: int = 0, limit: int = 100):
-        results = db.query(models.Summoner).offset(skip).limit(limit).order_by(models.Summoner.rank).all()        
+    def fetch_all(db: Session):
+        results = db.query(models.Summoner).order_by(models.Summoner.rank).all()        
         #results = db.query(models.Summoner).options(joinedload('division'), joinedload('role'),joinedload('league')).offset(skip).limit(limit).all()
         return results    
 
